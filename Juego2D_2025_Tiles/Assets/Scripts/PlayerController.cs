@@ -5,59 +5,60 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] float velocidadBase = 10;
+    [SerializeField] float velocidadCorrer = 20;
     [SerializeField] float cantidadGiro = 10f;
-    [SerializeField] float velocidadBoost = 20;
-    [SerializeField] float velocidadBase = 10f;
-    //[SerializeField] float velocidadSurface = -5f;
-    float velocidad = 10;
-
+    [SerializeField] float fuerzaSalto = 10;
+    float velocidad;
     Rigidbody2D rb;
+    CapsuleCollider2D pies;
+    public bool tocaSuelo = false;
     SurfaceEffector2D surfaceEffector2D;
-    bool canMove = true;
+    bool puedeMover = true;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        pies = GetComponent<CapsuleCollider2D>();
         surfaceEffector2D = FindObjectOfType<SurfaceEffector2D>();
     }
 
-    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (puedeMover && tocaSuelo)
+        {
+            Acelerar();
+            //Mover();
+            RotarJugador();
+            //Saltar();
+        }
+    }
     void Update()
     {
-        if (canMove)
+        Saltar();
+    }
+
+    private void Saltar()
+    {
+        if (pies.IsTouchingLayers(LayerMask.GetMask("Plataforma")))
+            tocaSuelo = true;
+        else
+            tocaSuelo = false;
+
+        if (Input.GetButtonDown("Jump") && tocaSuelo)
         {
-            Mover();
-            RotarJugador();
-            Acelerar();
+            rb.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
         }
+
+
     }
 
     public void PararControl()
     {
-        canMove = false;
-    }
-    void Mover()
-    {
-        float moverVertical = Input.GetAxis("Vertical");
-
-        Vector3 movimiento = new Vector3(moverVertical, 0f, 0f);
-        rb.AddForce(movimiento * velocidad);
+        puedeMover = false;
     }
 
-    void Acelerar()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            velocidad = velocidadBoost;
-        }
-        else
-        {
-            velocidad = velocidadBase;
-        }
-    }
-
-    void RotarJugador()
+    private void RotarJugador()
     {
         float moverHorizontal = Input.GetAxis("Horizontal");
         rb.AddTorque(-cantidadGiro * moverHorizontal);
@@ -70,5 +71,24 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddTorque(-cantidadGiro);
         }*/
+    }
+
+    void Acelerar()
+    {
+        if (Input.GetKey(KeyCode.LeftControl))
+            velocidad = velocidadCorrer;
+        else
+            velocidad = velocidadBase;
+
+        surfaceEffector2D.speed = velocidad;
+    }
+    private void Mover()
+    {
+        float mover = Input.GetAxis("Vertical");
+        //Sirface effector solo funciona con fuerzas.
+        Vector2 movimiento = new Vector2(mover, 0);
+        rb.AddForce(movimiento * velocidadBase);
+        //Vector3 movimiento = new Vector3(mover * velocidad, rb.velocity.y, 0);
+        //rb.velocity = movimiento;
     }
 }
