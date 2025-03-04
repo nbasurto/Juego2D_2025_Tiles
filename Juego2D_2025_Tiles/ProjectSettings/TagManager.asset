@@ -42,3 +42,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Fondo
+    uniqueID: 2117193585
+    locked: 0
+  - name: Plataformas
+    uniqueID: 1407068001
+    locked: 0
+  - name: Personaje
+    uniqueID: 3711391969
+    locked: 0
+  - name: Decoracion
+    uniqueID: 1419015629
+    locked: 0

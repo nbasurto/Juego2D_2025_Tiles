@@ -14,10 +14,11 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider2D pies;
     public bool tocaSuelo = false;
     SurfaceEffector2D surfaceEffector2D;
-    bool puedeMover = true;
+    public bool puedeMover = true;
 
     void Start()
     {
+        velocidad = velocidadBase;
         rb = GetComponent<Rigidbody2D>();
         pies = GetComponent<CapsuleCollider2D>();
         surfaceEffector2D = FindObjectOfType<SurfaceEffector2D>();
@@ -27,15 +28,16 @@ public class PlayerController : MonoBehaviour
     {
         if (puedeMover && tocaSuelo)
         {
-            Acelerar();
-            //Mover();
-            RotarJugador();
+            //Acelerar();
+            Mover();
+            //RotarJugador();
             //Saltar();
         }
     }
     void Update()
     {
         Saltar();
+        VolteaSprite();
     }
 
     private void Saltar()
@@ -72,6 +74,12 @@ public class PlayerController : MonoBehaviour
             rb.AddTorque(-cantidadGiro);
         }*/
     }
+    private void VolteaSprite()
+    {
+        bool seMueve = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+        if(seMueve)
+            transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
+    }
 
     void Acelerar()
     {
@@ -80,15 +88,16 @@ public class PlayerController : MonoBehaviour
         else
             velocidad = velocidadBase;
 
-        surfaceEffector2D.speed = velocidad;
+        //surfaceEffector2D.speed = velocidad;
     }
     private void Mover()
     {
-        float mover = Input.GetAxis("Vertical");
+        float mover = Input.GetAxis("Horizontal");
         //Sirface effector solo funciona con fuerzas.
-        Vector2 movimiento = new Vector2(mover, 0);
-        rb.AddForce(movimiento * velocidadBase);
-        //Vector3 movimiento = new Vector3(mover * velocidad, rb.velocity.y, 0);
-        //rb.velocity = movimiento;
+        //Vector2 movimiento = new Vector2(mover, 0);
+        //rb.AddForce(movimiento * velocidadBase);
+        Debug.Log(mover);
+        Vector3 movimiento = new Vector3(mover * velocidad, rb.velocity.y, 0);
+        rb.velocity = movimiento;
     }
 }

@@ -5,34 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class DeteccionGolpe : MonoBehaviour
 {
-    [SerializeField] float retardo = 0.5f;
-    [SerializeField] ParticleSystem crashEffect;
-    //[SerializeField] AudioClip crashSFX;
+    [SerializeField] ParticleSystem efectoMuerte;
     PlayerController controlador;
-    bool haMuerto = false;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         controlador = GetComponent<PlayerController>();
     }
 
-    
+   
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.tag == "Suelo" && !haMuerto)
+        if (collision.gameObject.CompareTag("Pinchos"))
         {
-            haMuerto = true;
-            //FindObjectOfType<PlayerController>().PararControl();
             controlador.PararControl();
-            crashEffect.Play();
-            //GetComponent<AudioSource>().PlayOneShot(crashSFX);
-            Invoke("ReloadScene", retardo);
+            efectoMuerte.Play();
+            Invoke("cargarEscena", 2f);
         }
     }
 
-    void ReloadScene()
+    void cargarEscena()
     {
-        SceneManager.LoadScene(0);
+        int escenaActual = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(escenaActual);
     }
+
 }
