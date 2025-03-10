@@ -20,6 +20,7 @@ public class DeteccionGolpe : MonoBehaviour
         if (collision.gameObject.CompareTag("Pinchos"))
         {
             controlador.PararControl();
+            controlador.Morir();
             efectoMuerte.Play();
             Invoke("cargarEscena", 2f);
         }

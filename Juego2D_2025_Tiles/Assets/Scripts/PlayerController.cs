@@ -15,9 +15,11 @@ public class PlayerController : MonoBehaviour
     public bool tocaSuelo = false;
     SurfaceEffector2D surfaceEffector2D;
     public bool puedeMover = true;
+    Animator anim;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         velocidad = velocidadBase;
         rb = GetComponent<Rigidbody2D>();
         pies = GetComponent<CapsuleCollider2D>();
@@ -26,33 +28,52 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (puedeMover && tocaSuelo)
+        if (puedeMover)
         {
-            //Acelerar();
+            Acelerar();
             Mover();
             //RotarJugador();
-            //Saltar();
         }
     }
     void Update()
     {
+        ComprueboSuelo();
         Saltar();
         VolteaSprite();
     }
 
-    private void Saltar()
+    private void ComprueboSuelo()
     {
         if (pies.IsTouchingLayers(LayerMask.GetMask("Plataforma")))
+        {
             tocaSuelo = true;
+            velocidad = velocidadBase;
+            anim.SetBool("estaSuelo", true);
+        }
         else
+        {
             tocaSuelo = false;
+            velocidad = velocidadBase / 3;
+            anim.SetBool("estaSuelo", false);
+        }
+    }
 
+    private void Saltar()
+    {
+        anim.SetFloat("VelocidadVertical", rb.velocity.y);
         if (Input.GetButtonDown("Jump") && tocaSuelo)
         {
             rb.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
+            anim.SetBool("estaSaltando", true);
+            Debug.Log("Esto en down: " + rb.velocity.y);
+            anim.SetFloat("VelocidadVertical", rb.velocity.y);  
         }
-
-
+        if (Input.GetButtonUp("Jump"))
+        {
+            anim.SetFloat("VelocidadVertical", rb.velocity.y);
+            Debug.Log("Esto en up: " + rb.velocity.y);   
+            anim.SetBool("estaSaltando", false);
+        }
     }
 
     public void PararControl()
@@ -93,11 +114,21 @@ public class PlayerController : MonoBehaviour
     private void Mover()
     {
         float mover = Input.GetAxis("Horizontal");
+        if (mover != 0f)
+            anim.SetBool("estaMoviendo", true);
+        else
+            anim.SetBool("estaMoviendo", false);
+
         //Sirface effector solo funciona con fuerzas.
         //Vector2 movimiento = new Vector2(mover, 0);
         //rb.AddForce(movimiento * velocidadBase);
         Debug.Log(mover);
         Vector3 movimiento = new Vector3(mover * velocidad, rb.velocity.y, 0);
         rb.velocity = movimiento;
+    }
+    public void Morir()
+    {
+        anim.SetTrigger("Muriendo");
+        rb.velocity = new Vector2(10f, 50f);
     }
 }
