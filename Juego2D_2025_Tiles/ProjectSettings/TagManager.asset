@@ -6,16 +6,17 @@ TagManager:
   tags:
   - Suelo
   - Pinchos
+  - Enemigo
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Jugador
   - Water
   - UI
   - Plataforma
-  - 
-  - 
+  - Enemigo
+  - Pinchos
   - 
   - 
   - 

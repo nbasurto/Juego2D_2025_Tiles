@@ -14,11 +14,12 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider2D pies;
     public bool tocaSuelo = false;
     SurfaceEffector2D surfaceEffector2D;
-    public bool puedeMover = true;
+    public bool puedeMover;
     Animator anim;
 
     void Start()
     {
+        puedeMover = true;
         anim = GetComponent<Animator>();
         velocidad = velocidadBase;
         rb = GetComponent<Rigidbody2D>();
@@ -65,13 +66,13 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
             anim.SetBool("estaSaltando", true);
-            Debug.Log("Esto en down: " + rb.velocity.y);
+            //Debug.Log("Esto en down: " + rb.velocity.y);
             anim.SetFloat("VelocidadVertical", rb.velocity.y);  
         }
         if (Input.GetButtonUp("Jump"))
         {
             anim.SetFloat("VelocidadVertical", rb.velocity.y);
-            Debug.Log("Esto en up: " + rb.velocity.y);   
+            //Debug.Log("Esto en up: " + rb.velocity.y);   
             anim.SetBool("estaSaltando", false);
         }
     }
@@ -122,7 +123,7 @@ public class PlayerController : MonoBehaviour
         //Sirface effector solo funciona con fuerzas.
         //Vector2 movimiento = new Vector2(mover, 0);
         //rb.AddForce(movimiento * velocidadBase);
-        Debug.Log(mover);
+       // Debug.Log(mover);
         Vector3 movimiento = new Vector3(mover * velocidad, rb.velocity.y, 0);
         rb.velocity = movimiento;
     }

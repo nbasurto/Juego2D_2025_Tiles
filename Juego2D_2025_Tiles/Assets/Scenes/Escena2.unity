@@ -137,11 +137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8742544970572532410, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.4975114
+      value: -6.43
       objectReference: {fileID: 0}
     - target: {fileID: 8742544970572532410, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06392454
+      value: 3.69
       objectReference: {fileID: 0}
     - target: {fileID: 8742544970572532410, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -180,11 +180,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
---- !u!4 &277188046 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8742544970572532410, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
-  m_PrefabInstance: {fileID: 277188045}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &431538678
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +194,7 @@ GameObject:
   - component: {fileID: 431538684}
   - component: {fileID: 431538683}
   - component: {fileID: 431538682}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pinchos
   m_TagString: Pinchos
   m_Icon: {fileID: 0}
@@ -421,7 +416,7 @@ CompositeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -757,13 +752,14 @@ GameObject:
   - component: {fileID: 1340240425}
   - component: {fileID: 1340240424}
   - component: {fileID: 1340240426}
-  m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
+  - component: {fileID: 1340240427}
+  m_Layer: 7
+  m_Name: Enemigo
+  m_TagString: Enemigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1340240421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,7 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b7fd694c13d524aa9a49c9231fd3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadEnemigo: 1
+  velocidadEnemigo: 3
 --- !u!212 &1340240422
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -818,7 +814,7 @@ SpriteRenderer:
   m_SortingLayerID: -583575327
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc1a9700884c11b43bd4fd7293dce81f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -838,7 +834,7 @@ Transform:
   m_GameObject: {fileID: 1340240420}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7480404, y: -0.68, z: 0}
+  m_LocalPosition: {x: -1.7480404, y: -1.064, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -852,7 +848,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340240420}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -870,7 +866,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &1340240425
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -900,11 +896,11 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: -0.05}
+  m_Size: {x: 0.73, y: 1.46}
   m_Direction: 0
 --- !u!95 &1340240426
 Animator:
@@ -927,6 +923,51 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &1340240427
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340240420}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.48, y: -0.86}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.3333334, y: 1.8333334}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.12, y: 0.32}
+  m_EdgeRadius: 0
 --- !u!1 &1504260278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,7 +1460,7 @@ Transform:
   m_GameObject: {fileID: 1920292537}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.4975114, y: 0.06392454, z: -10}
+  m_LocalPosition: {x: -1.7480404, y: -1.064, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85052,7 +85093,7 @@ MonoBehaviour:
   m_Priority: 4
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 277188046}
+  m_Follow: {fileID: 1340240423}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -85081,7 +85122,7 @@ Transform:
   m_GameObject: {fileID: 2143288448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.4975114, y: 0.06392454, z: -10}
+  m_LocalPosition: {x: -1.7480404, y: -1.064, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
