@@ -37,7 +37,7 @@ public class DeteccionGolpe : MonoBehaviour
         if (cuerpo.IsTouchingLayers(layersMuerte))
         {
             Debug.Log("¡El personaje colisiona a un enemigo!");
-            controlador.PararControl();
+            //controlador.PararControl();
             controlador.Morir();
             efectoMuerte.Play();
             //Invoke("cargarEscena", 2f);

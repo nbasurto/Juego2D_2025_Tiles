@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     }
     public void MuerteJugador()
     {
-        tiempoTranscurrido = 0;
+    
 
         if (numeroVidas > 1)
         {
@@ -65,12 +65,13 @@ public class GameManager : MonoBehaviour
 
     void QuitarVidas()
     {
-        Debug.Log("LLEGO");
         numeroVidas--;
+
         //Reseteo Nivel
         int escenaActual = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(escenaActual);
         textoVidas.text = numeroVidas.ToString();
+        tiempoTranscurrido = 0;
     }
 
 

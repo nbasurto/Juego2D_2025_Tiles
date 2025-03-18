@@ -17,6 +17,14 @@ public class PlayerController : MonoBehaviour
     public bool puedeMover;
     Animator anim;
 
+    //Disparos
+    bool miroDerecha = true;
+    [SerializeField] GameObject flecha;
+    [SerializeField] GameObject arco;
+    [SerializeField] GameObject arcoFlecha;
+    float tiempoEntreDisparos = 1;
+    float siguienteDisparo = 0;
+
     void Start()
     {
         puedeMover = true;
@@ -38,9 +46,14 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        if (!puedeMover) { return; }
         ComprueboSuelo();
         Saltar();
         VolteaSprite();
+        if (Input.GetButtonDown("Fire1") && Time.time >= siguienteDisparo)
+        {
+            StartCoroutine(Disparar());
+        }
     }
 
     private void ComprueboSuelo()
@@ -82,25 +95,29 @@ public class PlayerController : MonoBehaviour
         puedeMover = false;
     }
 
-    private void RotarJugador()
-    {
-        float moverHorizontal = Input.GetAxis("Horizontal");
-        rb.AddTorque(-cantidadGiro * moverHorizontal);
-        /*
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            rb.AddTorque(cantidadGiro);
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rb.AddTorque(-cantidadGiro);
-        }*/
-    }
+    /*  private void RotarJugador()
+      {
+          float moverHorizontal = Input.GetAxis("Horizontal");
+          rb.AddTorque(-cantidadGiro * moverHorizontal);
+          /*
+          if (Input.GetKey(KeyCode.LeftArrow))
+          {
+              rb.AddTorque(cantidadGiro);
+          }
+          else if (Input.GetKey(KeyCode.RightArrow))
+          {
+              rb.AddTorque(-cantidadGiro);
+          }
+      }*/
     private void VolteaSprite()
     {
-        bool seMueve = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+        bool seMueve = Mathf.Abs(rb.velocity.x) > 0f;
         if(seMueve)
             transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
+        if (Mathf.Sign(rb.velocity.x) == 1)
+            miroDerecha = true;
+        else
+            miroDerecha = false;
     }
 
     void Acelerar()
@@ -129,8 +146,31 @@ public class PlayerController : MonoBehaviour
     }
     public void Morir()
     {
-        anim.SetTrigger("Muriendo");
-        rb.velocity = new Vector2(10f, 50f);
-        FindObjectOfType<GameManager>().MuerteJugador();
+        if (puedeMover)
+        {
+            puedeMover = false;
+            anim.SetTrigger("Muriendo");
+            rb.velocity = new Vector2(10f, 50f);
+            FindObjectOfType<GameManager>().MuerteJugador();
+        }
+    }
+
+    IEnumerator Disparar()
+    {
+        float anguloDisparo = miroDerecha ? -45f : 130f;
+
+        Quaternion rotacion = Quaternion.Euler(0, 0, anguloDisparo);
+        Instantiate(flecha, arco.transform.position, rotacion);
+
+        arcoFlecha.SetActive(false);
+        arco.SetActive(true);
+
+        siguienteDisparo = Time.time + tiempoEntreDisparos;
+
+        yield return new WaitForSeconds(tiempoEntreDisparos);
+
+        arcoFlecha.SetActive(true);
+        arco.SetActive(false);
+
     }
 }

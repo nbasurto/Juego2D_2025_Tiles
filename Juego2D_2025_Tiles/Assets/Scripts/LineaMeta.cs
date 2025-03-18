@@ -19,6 +19,7 @@ public class LineaMeta : MonoBehaviour
 
     void ReloadScene()
     {
-        SceneManager.LoadScene(0);
+        int escenaActual = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(escenaActual+1);
     }
 }

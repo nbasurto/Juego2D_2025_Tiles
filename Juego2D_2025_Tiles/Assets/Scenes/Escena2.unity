@@ -353,18 +353,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jugador
       objectReference: {fileID: 0}
-    - target: {fileID: 8338932054686585941, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
-      propertyPath: m_Size.y
-      value: 1.9707359
-      objectReference: {fileID: 0}
-    - target: {fileID: 8338932054686585941, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.12536794
-      objectReference: {fileID: 0}
-    - target: {fileID: 8338932054686585941, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8742544970572532410, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.43
@@ -1027,8 +1015,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 9
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 78eaa42594d6d3947ad8eec16bbec45d, type: 2}
-  m_sharedMaterial: {fileID: -1108762240458649935, guid: 78eaa42594d6d3947ad8eec16bbec45d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24f724f71a09a5f458298bbbc1e4e57c, type: 2}
+  m_sharedMaterial: {fileID: 5154477385695944495, guid: 24f724f71a09a5f458298bbbc1e4e57c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2100,7 +2088,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 93fb37739e6e9a443b1d51cee900d342, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
