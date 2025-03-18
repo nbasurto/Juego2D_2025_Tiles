@@ -131,5 +131,6 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetTrigger("Muriendo");
         rb.velocity = new Vector2(10f, 50f);
+        FindObjectOfType<GameManager>().MuerteJugador();
     }
 }

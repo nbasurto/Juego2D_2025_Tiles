@@ -20,32 +20,34 @@ public class DeteccionGolpe : MonoBehaviour
 
     private void Update()
     {
-        //if (collision.gameObject.CompareTag("Pinchos") || collision.gameObject.CompareTag("Enemigo"))
+        /*//if (collision.gameObject.CompareTag("Pinchos") || collision.gameObject.CompareTag("Enemigo"))
         if(cuerpo.IsTouchingLayers(layersMuerte))
         {
             Debug.Log("¡El personaje colisiona a un enemigo!");
             controlador.PararControl();
             controlador.Morir();
             efectoMuerte.Play();
-            Invoke("cargarEscena", 2f);
-        }
+            //Invoke("cargarEscena", 2f);
+        }*/
     }
-    /*void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("¡EntroTrigger!");
+        //if (collision.gameObject.CompareTag("Pinchos") || collision.gameObject.CompareTag("Enemigo"))
         if (cuerpo.IsTouchingLayers(layersMuerte))
         {
-            Debug.Log("¡El personaje tocó a un enemigo!");
+            Debug.Log("¡El personaje colisiona a un enemigo!");
+            controlador.PararControl();
+            controlador.Morir();
+            efectoMuerte.Play();
+            //Invoke("cargarEscena", 2f);
         }
-        if (cuerpo.IsTouchingLayers(LayerMask.GetMask("Enemigo", "Pinchos")))
-        {
-            Debug.Log("¡El personaje tocó a un enemigo 222!");
-        }
-    }*/
+    }
 
-    void cargarEscena()
+    /*void cargarEscena()
     {
         int escenaActual = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(escenaActual);
     }
-
+    */
 }
