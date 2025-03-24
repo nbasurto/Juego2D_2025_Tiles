@@ -169,7 +169,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -184,13 +184,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 34.766098, y: -15.7284565}
-      - {x: 33.887775, y: -2.6730123}
-      - {x: 32.766003, y: 13.0191965}
-      - {x: -25.53732, y: 11.936504}
-      - {x: -24.516752, y: -15.93736}
-      - {x: 0.58778536, y: -15.719164}
-      - {x: 13.02464, y: -16.273973}
+    - - {x: 29.758549, y: -7.4264674}
+      - {x: 29.93445, y: -2.5412345}
+      - {x: 28.878565, y: 10.647201}
+      - {x: -24.944323, y: 10.552839}
+      - {x: -25.944834, y: -9.158963}
+      - {x: 0.64812195, y: -7.8151035}
+      - {x: 12.563424, y: -7.5766573}
   m_UseDelaunayMesh: 0
 --- !u!4 &7246313
 Transform:
@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 7246311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.7119536, y: -0.46439293, z: -0.24646297}
+  m_LocalPosition: {x: -6.7119536, y: -0.46439293, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -644,11 +644,11 @@ PrefabInstance:
       objectReference: {fileID: 855405137}
     - target: {fileID: 8742544970572532410, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.87
+      value: -25.83
       objectReference: {fileID: 0}
     - target: {fileID: 8742544970572532410, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.82
+      value: 6.56
       objectReference: {fileID: 0}
     - target: {fileID: 8742544970572532410, guid: 865591223f3342641a7b6e7047aebb11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1397,11 +1397,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3491316568409419841, guid: 23104a609626f814785368f502dfbe8d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.060911
+      value: 3.33
       objectReference: {fileID: 0}
     - target: {fileID: 3491316568409419841, guid: 23104a609626f814785368f502dfbe8d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5370991
+      value: -3.12
       objectReference: {fileID: 0}
     - target: {fileID: 3491316568409419841, guid: 23104a609626f814785368f502dfbe8d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2385,7 +2385,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 80
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -2412,7 +2412,7 @@ Transform:
   m_GameObject: {fileID: 1920292537}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.87, y: -0.82, z: -10}
+  m_LocalPosition: {x: -12.812895, y: 1.7304101, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86048,7 +86048,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1109825712}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 80
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -86075,7 +86075,7 @@ Transform:
   m_GameObject: {fileID: 2143288448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.87, y: -0.82, z: -10}
+  m_LocalPosition: {x: -25.83, y: 6.56, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -86091,9 +86091,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2143288448}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b880f5bd60b7b114badc34b8eae84b1b, type: 3}
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 7246312}
+  m_Damping: 0.3
+  m_MaxWindowSize: -1
 --- !u!1001 &6355511935381346396
 PrefabInstance:
   m_ObjectHideFlags: 0
