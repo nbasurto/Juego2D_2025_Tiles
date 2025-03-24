@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textoVidas;
     [SerializeField] TextMeshProUGUI textoTiempo;
+    [SerializeField] TextMeshProUGUI textoEnemigos;
 
     [SerializeField] int numeroVidas = 3;
+    int enemigosJuego = 0;
     float tiempoTranscurrido;
 
     void Awake()
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
         textoVidas.text = numeroVidas.ToString();
         tiempoTranscurrido = 0;
         textoTiempo.text = tiempoTranscurrido.ToString();
+        BuscoEnemigos();
     }
 
     // Update is called once per frame
@@ -67,12 +70,39 @@ public class GameManager : MonoBehaviour
     {
         numeroVidas--;
 
-        //Reseteo Nivel
         int escenaActual = SceneManager.GetActiveScene().buildIndex;
+        // Suscribirse al evento de carga de escena
+        SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(escenaActual);
-        textoVidas.text = numeroVidas.ToString();
-        tiempoTranscurrido = 0;
     }
 
+    // Se llama a este método cuando la escena ya está cargada.
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Desuscribirse para evitar múltiples llamadas
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        textoVidas.text = numeroVidas.ToString();
+        tiempoTranscurrido = 0;
+        BuscoEnemigos();
+    }
 
+    void BuscoEnemigos()
+    {
+        enemigosJuego = FindObjectsOfType<MovimientoEnemigo>().Length;
+        textoEnemigos.text = enemigosJuego.ToString();
+    }
+    public void ActualizaEnemigos()
+    {
+        enemigosJuego--;
+        textoEnemigos.text = enemigosJuego.ToString();
+        ComprueboFinNivel();
+    }
+    private void ComprueboFinNivel()
+    {
+        if (enemigosJuego <= 0)
+        {
+            int escenaActual = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(escenaActual + 1);
+        }
+    }
 }

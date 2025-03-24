@@ -25,5 +25,11 @@ public class MovimientoEnemigo : MonoBehaviour
     {
         transform.localScale = new Vector2(-(Mathf.Sign(rb.velocity.x)), 1f);
     }
-
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Espada")) // Asegurar que la espada tenga el Tag "Espada"
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

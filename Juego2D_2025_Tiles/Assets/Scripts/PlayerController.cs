@@ -22,17 +22,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject flecha;
     [SerializeField] GameObject arco;
     [SerializeField] GameObject arcoFlecha;
+    [SerializeField] GameObject espada;
+    [SerializeField] Collider2D colliderEspada; // Collider de la espada
     float tiempoEntreDisparos = 1;
     float siguienteDisparo = 0;
 
+    //Ataque
+    private float tiempoProximoAtaque = 0;
+    float cooldownAtaque = 0.5f;
+
+    bool estaAtacando = false;
+
     void Start()
     {
+        colliderEspada = espada.GetComponent<Collider2D>();
         puedeMover = true;
         anim = GetComponent<Animator>();
         velocidad = velocidadBase;
         rb = GetComponent<Rigidbody2D>();
         pies = GetComponent<CapsuleCollider2D>();
         surfaceEffector2D = FindObjectOfType<SurfaceEffector2D>();
+        colliderEspada.enabled = false;
     }
 
     void FixedUpdate()
@@ -50,9 +60,13 @@ public class PlayerController : MonoBehaviour
         ComprueboSuelo();
         Saltar();
         VolteaSprite();
-        if (Input.GetButtonDown("Fire1") && Time.time >= siguienteDisparo)
+
+        if (!estaAtacando)
         {
-            StartCoroutine(Disparar());
+            if (Input.GetButtonDown("Fire1") && Time.time >= siguienteDisparo)
+                StartCoroutine(Disparar());
+            if (Input.GetButtonDown("Fire2") && Time.time >= tiempoProximoAtaque)
+                StartCoroutine(Ataque());
         }
     }
 
@@ -111,7 +125,7 @@ public class PlayerController : MonoBehaviour
       }*/
     private void VolteaSprite()
     {
-        bool seMueve = Mathf.Abs(rb.velocity.x) > 0f;
+        bool seMueve = Mathf.Abs(rb.velocity.x) > 0.01f;
         if(seMueve)
             transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
         if (Mathf.Sign(rb.velocity.x) == 1)
@@ -157,11 +171,13 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Disparar()
     {
+        estaAtacando = true;
         float anguloDisparo = miroDerecha ? -45f : 130f;
 
         Quaternion rotacion = Quaternion.Euler(0, 0, anguloDisparo);
         Instantiate(flecha, arco.transform.position, rotacion);
-
+        
+        espada.SetActive(false);
         arcoFlecha.SetActive(false);
         arco.SetActive(true);
 
@@ -171,6 +187,23 @@ public class PlayerController : MonoBehaviour
 
         arcoFlecha.SetActive(true);
         arco.SetActive(false);
+        estaAtacando = false;
+
+    }
+    IEnumerator Ataque()
+    {
+        colliderEspada.enabled = true;
+        estaAtacando = true;
+        arcoFlecha.SetActive(false);
+        espada.SetActive(true);
+        anim.SetTrigger("Atacar");
+        tiempoProximoAtaque = Time.time + cooldownAtaque;
+        
+        yield return new WaitForSeconds(cooldownAtaque);
+        estaAtacando = false;
+        colliderEspada.enabled = false;
+        //espada.SetActive(false);
+        //arcoFlecha.SetActive(true);
 
     }
 }

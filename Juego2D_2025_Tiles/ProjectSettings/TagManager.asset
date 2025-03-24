@@ -7,6 +7,7 @@ TagManager:
   - Suelo
   - Pinchos
   - Enemigo
+  - Espada
   layers:
   - Default
   - TransparentFX

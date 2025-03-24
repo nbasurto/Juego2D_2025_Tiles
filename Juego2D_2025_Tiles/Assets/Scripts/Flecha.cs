@@ -6,6 +6,7 @@ public class Flecha : MonoBehaviour
 {
     Rigidbody2D rb;
     PlayerController jugador;
+    GameManager manager;
     [SerializeField] private float velocidad = 20f;
     float tiempoVida = 2f;
 
@@ -15,6 +16,7 @@ public class Flecha : MonoBehaviour
         StartCoroutine(AutoDestruccion());
         rb = GetComponent<Rigidbody2D>();
         jugador = FindAnyObjectByType<PlayerController>();
+        manager = FindAnyObjectByType<GameManager>();
         velocidad = jugador.transform.localScale.x * velocidad;
     }
 
@@ -30,6 +32,7 @@ public class Flecha : MonoBehaviour
     {
         if (other.CompareTag("Enemigo"))
         {
+            manager.ActualizaEnemigos();
             Destroy(other.gameObject);
         }
         Destroy(this.gameObject);
