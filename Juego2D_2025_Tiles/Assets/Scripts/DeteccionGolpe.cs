@@ -32,7 +32,6 @@ public class DeteccionGolpe : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("¡EntroTrigger!");
         //if (collision.gameObject.CompareTag("Pinchos") || collision.gameObject.CompareTag("Enemigo"))
         if (cuerpo.IsTouchingLayers(layersMuerte))
         {
@@ -43,11 +42,14 @@ public class DeteccionGolpe : MonoBehaviour
             //Invoke("cargarEscena", 2f);
         }
     }
-
-    /*void cargarEscena()
+    void OnTriggerExit2D(Collider2D other)
     {
-        int escenaActual = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(escenaActual);
+
+        if (other.CompareTag("Background"))
+        {
+            controlador.Morir();
+            //efectoMuerte.Play();
+        }
     }
-    */
+
 }

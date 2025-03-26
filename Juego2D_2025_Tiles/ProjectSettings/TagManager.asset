@@ -8,6 +8,7 @@ TagManager:
   - Pinchos
   - Enemigo
   - Espada
+  - Background
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Enemigo
   - Pinchos
   - Flecha
-  - 
+  - Background
   - 
   - 
   - 

@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
         bool seMueve = Mathf.Abs(rb.velocity.x) > 0.01f;
         if(seMueve)
             transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
-        if (Mathf.Sign(rb.velocity.x) == 1)
+        if (transform.localScale.x > 0)
             miroDerecha = true;
         else
             miroDerecha = false;

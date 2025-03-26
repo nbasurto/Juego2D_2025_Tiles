@@ -97,12 +97,20 @@ public class GameManager : MonoBehaviour
         textoEnemigos.text = enemigosJuego.ToString();
         ComprueboFinNivel();
     }
-    private void ComprueboFinNivel()
+    public void ComprueboFinNivel()
     {
         if (enemigosJuego <= 0)
         {
             int escenaActual = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(escenaActual + 1);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            if (SceneManager.sceneCount == escenaActual + 1)
+                SceneManager.LoadScene(escenaActual + 1);
+            else
+            {
+                SceneManager.LoadScene(0);
+                Destroy(this.gameObject);
+            }
+                
         }
     }
 }
